@@ -13,6 +13,8 @@
 		D06722851D873EB200CB0BEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D06722831D873EB200CB0BEB /* LaunchScreen.storyboard */; };
 		D067228F1D8741FB00CB0BEB /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067228E1D8741FB00CB0BEB /* Post.swift */; };
 		D06722911D87420600CB0BEB /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06722901D87420600CB0BEB /* PostController.swift */; };
+		D06722961D8744E000CB0BEB /* PostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06722951D8744E000CB0BEB /* PostsTableViewController.swift */; };
+		D06722981D87455200CB0BEB /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06722971D87455200CB0BEB /* SearchResultsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		D06722861D873EB200CB0BEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D067228E1D8741FB00CB0BEB /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D06722901D87420600CB0BEB /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
+		D06722951D8744E000CB0BEB /* PostsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostsTableViewController.swift; path = ../PostsTableViewController.swift; sourceTree = "<group>"; };
+		D06722971D87455200CB0BEB /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,8 @@
 				D067228E1D8741FB00CB0BEB /* Post.swift */,
 				D06722901D87420600CB0BEB /* PostController.swift */,
 				D067227E1D873EB200CB0BEB /* Main.storyboard */,
+				D06722951D8744E000CB0BEB /* PostsTableViewController.swift */,
+				D06722971D87455200CB0BEB /* SearchResultsTableViewController.swift */,
 				D06722921D87421300CB0BEB /* Utility */,
 			);
 			path = Timeline;
@@ -149,6 +155,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D067227B1D873EB200CB0BEB /* AppDelegate.swift in Sources */,
+				D06722961D8744E000CB0BEB /* PostsTableViewController.swift in Sources */,
+				D06722981D87455200CB0BEB /* SearchResultsTableViewController.swift in Sources */,
 				D067228F1D8741FB00CB0BEB /* Post.swift in Sources */,
 				D06722911D87420600CB0BEB /* PostController.swift in Sources */,
 			);
