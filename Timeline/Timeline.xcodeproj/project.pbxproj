@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D02D8CED1D877D0500E053DB /* PostDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D8CEC1D877D0500E053DB /* PostDetailTableViewController.swift */; };
+		D047FFCB1D8AFF9B0063EBC3 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D047FFCA1D8AFF9B0063EBC3 /* CloudKitManager.swift */; };
+		D047FFCD1D8B3DFA0063EBC3 /* CloudKitSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D047FFCC1D8B3DFA0063EBC3 /* CloudKitSyncable.swift */; };
 		D067227B1D873EB200CB0BEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067227A1D873EB200CB0BEB /* AppDelegate.swift */; };
 		D06722801D873EB200CB0BEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D067227E1D873EB200CB0BEB /* Main.storyboard */; };
 		D06722821D873EB200CB0BEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D06722811D873EB200CB0BEB /* Assets.xcassets */; };
@@ -20,10 +22,15 @@
 		D06722A11D877DC600CB0BEB /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06722A01D877DC600CB0BEB /* PostCell.swift */; };
 		D06722A31D877E2700CB0BEB /* CreatePostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06722A21D877E2700CB0BEB /* CreatePostTableViewController.swift */; };
 		D06722A51D87B08E00CB0BEB /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06722A41D87B08E00CB0BEB /* ImageViewController.swift */; };
+		D09AF53D1D89F80C00324457 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09AF53C1D89F80C00324457 /* SearchController.swift */; };
+		D09AF5411D8A012100324457 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09AF5401D8A012100324457 /* SearchCell.swift */; };
+		D0A598231D889FA1005A2649 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0A598221D889FA1005A2649 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D02D8CEC1D877D0500E053DB /* PostDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewController.swift; sourceTree = "<group>"; };
+		D047FFCA1D8AFF9B0063EBC3 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
+		D047FFCC1D8B3DFA0063EBC3 /* CloudKitSyncable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitSyncable.swift; sourceTree = "<group>"; };
 		D06722771D873EB200CB0BEB /* Timeline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timeline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D067227A1D873EB200CB0BEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D067227F1D873EB200CB0BEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -38,6 +45,10 @@
 		D06722A01D877DC600CB0BEB /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		D06722A21D877E2700CB0BEB /* CreatePostTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePostTableViewController.swift; sourceTree = "<group>"; };
 		D06722A41D87B08E00CB0BEB /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		D09AF53C1D89F80C00324457 /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		D09AF5401D8A012100324457 /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchCell.swift; path = ../SearchCell.swift; sourceTree = "<group>"; };
+		D0A598201D889F9E005A2649 /* Timeline.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timeline.entitlements; sourceTree = "<group>"; };
+		D0A598221D889FA1005A2649 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0A598231D889FA1005A2649 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +68,7 @@
 			children = (
 				D06722791D873EB200CB0BEB /* Timeline */,
 				D06722781D873EB200CB0BEB /* Products */,
+				D0A598211D889FA1005A2649 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,6 +95,10 @@
 		D06722921D87421300CB0BEB /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				D047FFCA1D8AFF9B0063EBC3 /* CloudKitManager.swift */,
+				D047FFCC1D8B3DFA0063EBC3 /* CloudKitSyncable.swift */,
+				D09AF53C1D89F80C00324457 /* SearchController.swift */,
+				D0A598201D889F9E005A2649 /* Timeline.entitlements */,
 				D06722811D873EB200CB0BEB /* Assets.xcassets */,
 				D06722831D873EB200CB0BEB /* LaunchScreen.storyboard */,
 				D067227A1D873EB200CB0BEB /* AppDelegate.swift */,
@@ -113,11 +130,28 @@
 				D06722951D8744E000CB0BEB /* PostsTableViewController.swift */,
 				D02D8CEC1D877D0500E053DB /* PostDetailTableViewController.swift */,
 				D06722A21D877E2700CB0BEB /* CreatePostTableViewController.swift */,
-				D06722A01D877DC600CB0BEB /* PostCell.swift */,
-				D06722A41D87B08E00CB0BEB /* ImageViewController.swift */,
 				D06722971D87455200CB0BEB /* SearchResultsTableViewController.swift */,
+				D06722A41D87B08E00CB0BEB /* ImageViewController.swift */,
+				D09AF5421D8A012900324457 /* Cells */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D09AF5421D8A012900324457 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D06722A01D877DC600CB0BEB /* PostCell.swift */,
+				D09AF5401D8A012100324457 /* SearchCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		D0A598211D889FA1005A2649 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D0A598221D889FA1005A2649 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +188,14 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = CWLLFTCWHP;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -194,15 +236,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				D067227B1D873EB200CB0BEB /* AppDelegate.swift in Sources */,
+				D09AF5411D8A012100324457 /* SearchCell.swift in Sources */,
 				D067229A1D87512200CB0BEB /* Comment.swift in Sources */,
+				D047FFCD1D8B3DFA0063EBC3 /* CloudKitSyncable.swift in Sources */,
 				D06722A51D87B08E00CB0BEB /* ImageViewController.swift in Sources */,
 				D06722A31D877E2700CB0BEB /* CreatePostTableViewController.swift in Sources */,
 				D06722961D8744E000CB0BEB /* PostsTableViewController.swift in Sources */,
 				D06722981D87455200CB0BEB /* SearchResultsTableViewController.swift in Sources */,
 				D06722A11D877DC600CB0BEB /* PostCell.swift in Sources */,
 				D067228F1D8741FB00CB0BEB /* Post.swift in Sources */,
+				D09AF53D1D89F80C00324457 /* SearchController.swift in Sources */,
 				D06722911D87420600CB0BEB /* PostController.swift in Sources */,
 				D02D8CED1D877D0500E053DB /* PostDetailTableViewController.swift in Sources */,
+				D047FFCB1D8AFF9B0063EBC3 /* CloudKitManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,12 +314,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -312,10 +359,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -325,6 +373,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Timeline/Timeline.entitlements;
 				DEVELOPMENT_TEAM = CWLLFTCWHP;
 				INFOPLIST_FILE = Timeline/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -340,6 +389,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Timeline/Timeline.entitlements;
 				DEVELOPMENT_TEAM = CWLLFTCWHP;
 				INFOPLIST_FILE = Timeline/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;

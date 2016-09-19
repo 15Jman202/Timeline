@@ -10,14 +10,20 @@ import UIKit
 
 class PostsTableViewController: UITableViewController, UISearchResultsUpdating {
     
-    var Posts: [Post] = []
+    // MARK: - View
     
     var searchController = UISearchController?()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSearchController()
+        
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.addObserver(self, selector: #selector(postsChanged(_: )), name: PostController.postChangedNotification, object: nil)
     }
 
+    // MARK: - Search Controller
+    
     func setupSearchController() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -35,37 +41,57 @@ class PostsTableViewController: UITableViewController, UISearchResultsUpdating {
         
         tableView.tableHeaderView = searchController.searchBar
     }
+
+    func postsChanged(notification: NSNotification) {
+        tableView.reloadData()
+    }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        
+        guard let text = searchController.searchBar.text, resultsController = searchController.searchResultsController as? SearchResultsTableViewController else { return }
+        resultsController.resultsArray = PostController.sharedController.posts.filter {$0.matchesSearchTerm(text)}.map {($0 as SearchableRecord)}
+        resultsController.tableView.reloadData()
     }
 
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Posts.count
+        return PostController.sharedController.posts.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as? PostCell
         
-        let post = Posts[indexPath.row]
+        let post = PostController.sharedController.posts[indexPath.row]
         cell?.PostImage.image = post.photo
         
         return cell ?? PostCell()
     }
     
-    
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard let indexpath = tableView.indexPathForSelectedRow else { return }
-        let post = Posts[indexpath.row]
-        let destinationVC = segue.destinationViewController as? PostDetailTableViewController
-        destinationVC?.post = post
+        
+        if segue.identifier == "toDetailView" {
+            guard let indexpath = tableView.indexPathForSelectedRow else { return }
+            let post = PostController.sharedController.posts[indexpath.row]
+            let destinationVC = segue.destinationViewController as? PostDetailTableViewController
+            destinationVC?.post = post
+        }
+        
+        if segue.identifier == "toDetailFromSearch" {
+            
+            if let detailViewController = segue.destinationViewController as? PostDetailTableViewController,
+                let sender = sender as? SearchCell,
+                let selectedIndexPath = (searchController?.searchResultsController as? SearchResultsTableViewController)?.tableView.indexPathForCell(sender),
+                let searchTerm = searchController?.searchBar.text?.lowercaseString {
+                
+                let posts = PostController.sharedController.posts.filter({ $0.matchesSearchTerm(searchTerm) })
+                let post = posts[selectedIndexPath.row]
+                
+                detailViewController.post = post
+            }
+        }
     }
 }
-
-
 
 

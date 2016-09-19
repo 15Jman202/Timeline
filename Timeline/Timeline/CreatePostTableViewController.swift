@@ -10,15 +10,27 @@ import UIKit
 
 class CreatePostTableViewController: UITableViewController {
     
+    var post: Post?
+    
     var image: UIImage?
     
+    // MARK: - Outlets
+    
     @IBOutlet weak var captionTextField: UITextField!
-
-    @IBAction func CreateButtonTapped(sender: AnyObject) {
+    
+    // MARK: - Actions
+    
+    @IBAction func cancelButtonTapped() {
+        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func createButtonTapped() {
         if let image = image,
             let caption = captionTextField.text {
             
-            PostController.sharedController.createPost(image, text: caption)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                PostController.sharedController.createPost(image, text: caption, completion: nil)
+            })
             
         } else {
             
@@ -27,6 +39,7 @@ class CreatePostTableViewController: UITableViewController {
             
             presentViewController(alertController, animated: true, completion: nil)
         }
+        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -36,11 +49,16 @@ class CreatePostTableViewController: UITableViewController {
             let embedViewController = segue.destinationViewController as? ImageViewController
             embedViewController?.delegate = self
         }
+    
     }
+    
+    // MARK: - View
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    // MARK: - Extension
 }
 
 extension CreatePostTableViewController: PhotoSelectViewControllerDelegate {
