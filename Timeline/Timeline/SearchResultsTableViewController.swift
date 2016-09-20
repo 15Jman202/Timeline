@@ -36,6 +36,8 @@ class SearchResultsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
-        self.presentingViewController?.performSegueWithIdentifier("toPostDetailFromSearch", sender: cell)
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.presentingViewController?.performSegueWithIdentifier("toDetailFromSearch", sender: cell)
+        })
     }
 }

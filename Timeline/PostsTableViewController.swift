@@ -17,9 +17,31 @@ class PostsTableViewController: UITableViewController, UISearchResultsUpdating {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchController()
-        
+        tryFullSync()
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: #selector(postsChanged(_: )), name: PostController.postChangedNotification, object: nil)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    func tryFullSync(completion: (() -> Void)? = nil) {
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        
+        PostController.sharedController.preformFullSync {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            if let completion = completion {
+                completion()
+            }
+        }
+    }
+
+    @IBAction func refreshRequested(sender: UIRefreshControl) {
+        tryFullSync {
+            self.refreshControl?.endRefreshing()
+        }
     }
 
     // MARK: - Search Controller

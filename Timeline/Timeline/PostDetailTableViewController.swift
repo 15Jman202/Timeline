@@ -16,17 +16,15 @@ class PostDetailTableViewController: UITableViewController {
     
     // MARK: - Actions
     
-    @IBAction func CommentButtonTapped(sender: AnyObject) {
+    
+    @IBAction func commentButtonPressed(sender: UIBarButtonItem) {
         presentCommentController()
     }
     
-    @IBAction func ShareButtonTapped(sender: AnyObject) {
+    @IBAction func shareButtonPressed(sender: UIBarButtonItem) {
         presentShareController()
     }
     
-    @IBAction func FollowButtonTapped(sender: AnyObject) {
-        
-    }
     
     // MARK: - View
     
@@ -86,8 +84,10 @@ class PostDetailTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("commentCell", forIndexPath: indexPath)
         guard let post = post else { return cell }
+        let comment = post.comments[indexPath.row]
         
-        cell.detailTextLabel?.text = "\(post.comments[indexPath.row])"
+        cell.textLabel?.text = comment.text
+        cell.detailTextLabel?.text = "\((comment.timeStamp))"
         PhotoImageView.image = post.photo
         
         return cell
