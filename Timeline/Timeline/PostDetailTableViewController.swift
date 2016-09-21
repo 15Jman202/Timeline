@@ -16,12 +16,12 @@ class PostDetailTableViewController: UITableViewController {
     
     // MARK: - Actions
     
-    
-    @IBAction func commentButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func commentButtonTapped(sender: UIBarButtonItem) {
         presentCommentController()
+        PostController.sharedController.fetchNewPosts(Comment.kComment)
     }
     
-    @IBAction func shareButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func shareButtonTapped(sender: UIBarButtonItem) {
         presentShareController()
     }
     
@@ -81,13 +81,21 @@ class PostDetailTableViewController: UITableViewController {
             return post.comments.count
     }
 
+    var dateFormatter: NSDateFormatter {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .ShortStyle
+        formatter.timeStyle = .ShortStyle
+        return formatter
+    }
+    
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("commentCell", forIndexPath: indexPath)
         guard let post = post else { return cell }
         let comment = post.comments[indexPath.row]
         
         cell.textLabel?.text = comment.text
-        cell.detailTextLabel?.text = "\((comment.timeStamp))"
+        cell.detailTextLabel?.text = "\(dateFormatter.stringFromDate(post.timeStamp))"
         PhotoImageView.image = post.photo
         
         return cell

@@ -21,11 +21,11 @@ class PostController {
     static let sharedController = PostController()
     
     var sortedPosts: [Post] {
-        return posts.sort { return $0.timeStamp.compare($1.timeStamp) == .OrderedAscending }
+        return posts.sort { return $0.timeStamp.compare($1.timeStamp) == .OrderedDescending }
     }
     
     var comments: [Comment] {
-        return posts.flatMap { $0.comments }
+        return sortedPosts.flatMap { $0.comments }
     }
     
     var posts = [Post]() {
@@ -112,14 +112,17 @@ class PostController {
         }
     }
     
+    // MARK: - Subscribe
+    
+    
     
     // MARK: - CloudKit
     
     private func recordsOfType(type: String) -> [CloudKitSyncable] {
         switch type {
-        case "Post":
-            return posts.flatMap { $0 as CloudKitSyncable }
-        case "Comment":
+        case Post.kPost:
+            return sortedPosts.flatMap { $0 as CloudKitSyncable }
+        case Comment.kComment:
             return comments.flatMap { $0 as CloudKitSyncable }
         default:
             return []
@@ -134,7 +137,7 @@ class PostController {
         return recordsOfType(type).filter { !$0.isSynced }
     }
     
-    func fetchNewPosts(type: String, completion: (() -> Void)?) {
+    func fetchNewPosts(type: String = Post.kPost, completion: (() -> Void)? = nil) {
         let gotReferences = self.syncedRecords(type).flatMap {$0.cloudKitReference}
         var predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [gotReferences])
         
@@ -171,6 +174,7 @@ class PostController {
     func pushChangesToCloud(success: ((success: Bool, error: NSError?) -> Void)) {
         let unsavedPosts = unsyncedRecords(Post.kPost) as? [Post] ?? []
         let unsavedComments = unsyncedRecords(Comment.kComment) as? [Comment] ?? []
+        
         var unsyncedChanges = [CKRecord: CloudKitSyncable]()
         for post in unsavedPosts {
             let record = CKRecord(post: post)

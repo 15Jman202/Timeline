@@ -22,10 +22,6 @@ class PostsTableViewController: UITableViewController, UISearchResultsUpdating {
         nc.addObserver(self, selector: #selector(postsChanged(_: )), name: PostController.postChangedNotification, object: nil)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     func tryFullSync(completion: (() -> Void)? = nil) {
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
@@ -50,7 +46,7 @@ class PostsTableViewController: UITableViewController, UISearchResultsUpdating {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let resultsController = storyboard.instantiateViewControllerWithIdentifier("resultsTVC")
+        let resultsController = storyboard.instantiateViewControllerWithIdentifier("ResultsTableViewController")
         
         searchController = UISearchController(searchResultsController: resultsController)
         
@@ -58,8 +54,9 @@ class PostsTableViewController: UITableViewController, UISearchResultsUpdating {
         
         searchController.searchBar.placeholder = "Search Posts"
         searchController.hidesNavigationBarDuringPresentation = true
-        searchController.definesPresentationContext = true
+        self.definesPresentationContext = true
         searchController.searchResultsUpdater = self
+        tableView.tableHeaderView = searchController.searchBar
         
         tableView.tableHeaderView = searchController.searchBar
     }
@@ -70,20 +67,20 @@ class PostsTableViewController: UITableViewController, UISearchResultsUpdating {
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         guard let text = searchController.searchBar.text, resultsController = searchController.searchResultsController as? SearchResultsTableViewController else { return }
-        resultsController.resultsArray = PostController.sharedController.posts.filter {$0.matchesSearchTerm(text)}.map {($0 as SearchableRecord)}
+        resultsController.resultsArray = PostController.sharedController.sortedPosts.filter {$0.matchesSearchTerm(text)}.map {($0 as SearchableRecord)}
         resultsController.tableView.reloadData()
     }
 
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PostController.sharedController.posts.count
+        return PostController.sharedController.sortedPosts.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as? PostCell
         
-        let post = PostController.sharedController.posts[indexPath.row]
+        let post = PostController.sharedController.sortedPosts[indexPath.row]
         cell?.PostImage.image = post.photo
         
         return cell ?? PostCell()
@@ -95,7 +92,7 @@ class PostsTableViewController: UITableViewController, UISearchResultsUpdating {
         
         if segue.identifier == "toDetailView" {
             guard let indexpath = tableView.indexPathForSelectedRow else { return }
-            let post = PostController.sharedController.posts[indexpath.row]
+            let post = PostController.sharedController.sortedPosts[indexpath.row]
             let destinationVC = segue.destinationViewController as? PostDetailTableViewController
             destinationVC?.post = post
         }
@@ -107,7 +104,7 @@ class PostsTableViewController: UITableViewController, UISearchResultsUpdating {
                 let selectedIndexPath = (searchController?.searchResultsController as? SearchResultsTableViewController)?.tableView.indexPathForCell(sender),
                 let searchTerm = searchController?.searchBar.text?.lowercaseString {
                 
-                let posts = PostController.sharedController.posts.filter({ $0.matchesSearchTerm(searchTerm) })
+                let posts = PostController.sharedController.sortedPosts.filter({ $0.matchesSearchTerm(searchTerm) })
                 let post = posts[selectedIndexPath.row]
                 
                 detailViewController.post = post
